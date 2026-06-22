@@ -1,0 +1,23 @@
+# backend/render.yaml
+services:
+  - type: web
+    name: bira-transit-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: bira_secret_jwt_2026_prod
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bira-transit-db
+          property: connectionString
+
+databases:
+  - name: bira-transit-db
+    databaseName: bira_transit
+    user: bira_user
